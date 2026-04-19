@@ -1,38 +1,122 @@
 [
   {
-    "salon_id": "salon-by-the-sea-miami",
-    "hero_headline": "A science-supported head spa ritual, designed for Salon by the Sea.",
-    "hero_subhead": "Your Coral Gables flagship and new Palm Beach location cater to a discerning clientele that values biodynamic wellness.",
+    "salon_id": "depasquale-the-spa",
+    "hero_headline": "A science-supported MaRe head spa ritual, bespoke for DePasquale The Spa.",
+    "hero_subhead": "DePasquale The Spa's Morris Plains location caters to a discerning clientele seeking luxury wellness experiences.",
     "why_you_bullets": [
-      "Salon by the Sea's revenue tier signals the capacity to integrate a luxury head spa system.",
-      "The modern-minimal aesthetic and organic-wellness focus aligns perfectly with MaRe's curated experience.",
-      "The recent Palm Beach expansion demonstrates a commitment to head health and client experience."
+      "DePasquale The Spa's $5M+ revenue signals the capacity for a premium head spa offering.",
+      "The classic-luxe aesthetic aligns perfectly with MaRe's commitment to Italian organic treatments.",
+      "The massive 26,000 sq ft facility offers ample space for a dedicated head spa system."
     ],
-    "roi_copy": "At ~40 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $187000.",
-    "testimonial_match": "boutique-multi-location"
-  },
-  {
-    "salon_id": "atelier-nord-nyc",
-    "hero_headline": "A science-supported head spa ritual, designed for Atelier Nord",
-    "hero_subhead": "Atelier Nord's location in Manhattan signals the luxury clientele that MaRe is built for.",
-    "why_you_bullets": [
-      "Atelier Nord's ~$2M annual revenue places it in MaRe's target partner tier.",
-      "The salon's classic-luxe aesthetic aligns perfectly with MaRe's brand of Italian organic luxury.",
-      "As a single flagship location, Atelier Nord can focus intently on the MaRe system."
-    ],
-    "roi_copy": "At ~65 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $312000.",
+    "roi_copy": "At ~500 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $350000.",
     "testimonial_match": "flagship-single-location"
   },
   {
-    "salon_id": "the-canyon-spa-aspen",
-    "hero_headline": "A MaRe head spa experience, designed for The Canyon Spa",
-    "hero_subhead": "Your Aspen location draws a discerning clientele perfectly suited to MaRe's science-supported approach.",
+    "salon_id": "igk-salon-soho",
+    "hero_headline": "A science-supported head spa ritual, designed for IGK Salon Soho.",
+    "hero_subhead": "IGK Salon Soho's reputation for modern style attracts a discerning clientele.",
     "why_you_bullets": [
-      "The Canyon Spa's $5M+ revenue tier places it among the exclusive venues ready to scale with MaRe.",
-      "The organic-wellness aesthetic of The Canyon Spa aligns with MaRe's commitment to biodynamic ingredients and holistic head health.",
-      "As the flagship spa inside a Leading Hotels of the World property, The Canyon Spa already serves the clientele MaRe is built for."
+      "IGK's $5M+ revenue tier signals the capacity for luxury service expansion.",
+      "The modern-minimal aesthetic of IGK salons aligns perfectly with MaRe's curated experience.",
+      "With multiple locations, IGK is positioned to scale a systematic head spa offering."
     ],
-    "roi_copy": "At ~90 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $425000.",
+    "roi_copy": "At ~300 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $280000.",
+    "testimonial_match": "boutique-multi-location"
+  },
+  {
+    "salon_id": "rossano-ferretti-hairspa",
+    "hero_headline": "A science-supported head spa ritual, designed for Rossano Ferretti Hairspa",
+    "hero_subhead": "Your Bergdorf Goodman location caters to a clientele that already expects the world's finest treatments.",
+    "why_you_bullets": [
+      "As a $2M+ revenue salon, Rossano Ferretti is positioned to capture significant additional revenue through MaRe.",
+      "The classic-luxe aesthetic of your salons aligns perfectly with MaRe's commitment to luxury and Italian craft.",
+      "With 20 locations, Rossano Ferretti is positioned to systematically scale the MaRe head spa protocol."
+    ],
+    "roi_copy": "At ~150 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $120000.",
+    "testimonial_match": "boutique-multi-location"
+  },
+  {
+    "salon_id": "spa-four-seasons-surf-club",
+    "hero_headline": "A MaRe head spa experience, designed for The Spa at Four Seasons.",
+    "hero_subhead": "In Surfside, The Spa at Four Seasons caters to a discerning clientele seeking classic luxury.",
+    "why_you_bullets": [
+      "The Spa at Four Seasons' $2M+ revenue tier signals the scale at which MaRe delivers maximum value.",
+      "Your oceanfront luxury wellness sanctuary is the ideal setting for our curated head spa rituals.",
+      "Located in Surfside, you serve a sophisticated clientele seeking the highest standard of wellness."
+    ],
+    "roi_copy": "At ~100 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $95000.",
+    "testimonial_match": "resort-spa"
+  },
+  {
+    "salon_id": "aman-spa-new-york",
+    "hero_headline": "A science-supported head spa experience, designed for Aman Spa New York.",
+    "hero_subhead": "Aman's flagship integrative wellness center in Manhattan is the ideal venue for a luxury head spa ritual.",
+    "why_you_bullets": [
+      "Aman Spa New York's $5M+ revenue tier signals the capacity for a premium, trichologist-developed service.",
+      "The modern-minimal aesthetic aligns perfectly with MaRe's science-supported approach to head health.",
+      "Aman's integrative wellness approach and unmatched exclusivity are a natural fit for MaRe's curated system."
+    ],
+    "roi_copy": "At ~200 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $250000.",
+    "testimonial_match": "resort-spa"
+  },
+  {
+    "salon_id": "carillon-miami-wellness-resort",
+    "hero_headline": "A science-supported head spa ritual, designed for Carillon Miami.",
+    "hero_subhead": "Carillon Miami's focus on clinical wellness aligns perfectly with MaRe's trichologist-developed protocols.",
+    "why_you_bullets": [
+      "As the largest spa and wellness facility on the East Coast, Carillon Miami is positioned to capture significant revenue uplift with MaRe.",
+      "Your clinical-medical aesthetic signals a clientele already primed for MaRe's science-supported approach to head health.",
+      "Located in Miami Beach, Carillon attracts a discerning clientele seeking exclusive wellness experiences."
+    ],
+    "roi_copy": "At ~400 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $320000.",
+    "testimonial_match": "medical-wellness"
+  },
+  {
+    "salon_id": "marie-robinson-salon",
+    "hero_headline": "Elevating Marie Robinson Salon: A science-supported head spa experience",
+    "hero_subhead": "Serving a discerning clientele in Manhattan, Marie Robinson Salon is known for its impeccable color services.",
+    "why_you_bullets": [
+      "As a $2M+ revenue salon, Marie Robinson Salon is positioned to capture significant revenue uplift with MaRe.",
+      "Your modern-minimal aesthetic and A-list clientele align perfectly with MaRe's luxury positioning.",
+      "With multiple locations in New York, Marie Robinson Salon is poised to scale the MaRe protocol across your network."
+    ],
+    "roi_copy": "At ~250 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $180000.",
+    "testimonial_match": "celebrity-stylist"
+  },
+  {
+    "salon_id": "maxine-salon",
+    "hero_headline": "A science-supported head spa ritual, designed for Maxine Salon",
+    "hero_subhead": "Maxine Salon's Gold Coast location signals a clientele perfectly suited to the MaRe experience.",
+    "why_you_bullets": [
+      "As a $2M+ salon, Maxine Salon is positioned to capture significant revenue uplift from MaRe.",
+      "The classic-luxe aesthetic of Maxine Salon aligns with MaRe's luxury positioning.",
+      "Maxine Salon's `personalization_hook` as a Gold Coast institution with a dedicated, affluent, multi-generational client base makes it a natural fit for MaRe."
+    ],
+    "roi_copy": "At ~300 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $210000.",
+    "testimonial_match": "flagship-single-location"
+  },
+  {
+    "salon_id": "sally-hershberger",
+    "hero_headline": "A science-supported head spa ritual, designed for Sally Hershberger.",
+    "hero_subhead": "Your modern-minimal aesthetic and discerning clientele are ideally suited to the MaRe experience.",
+    "why_you_bullets": [
+      "Sally Hershberger's $5M+ revenue tier signals the capacity for premium service offerings like MaRe.",
+      "Your bi-coastal luxury presence dictating Hollywood hair trends aligns perfectly with MaRe's exclusive positioning.",
+      "With multiple locations, Sally Hershberger can systematically integrate MaRe across your network."
+    ],
+    "roi_copy": "At ~200 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $200000.",
+    "testimonial_match": "celebrity-stylist"
+  },
+  {
+    "salon_id": "valmont-spa-carlyle",
+    "hero_headline": "Elevating the Valmont Spa at The Carlyle with MaRe",
+    "hero_subhead": "A bespoke head spa ritual, designed for the Carlyle's discerning clientele.",
+    "why_you_bullets": [
+      "Valmont Spa at The Carlyle's $1M+ revenue tier signals a clear opportunity for luxury retail expansion.",
+      "The intimate, ultra-luxurious spa environment aligns perfectly with MaRe's science-supported approach to head health.",
+      "Located in the heart of the Upper East Side, Valmont Spa at The Carlyle caters to a clientele that values exclusive wellness experiences."
+    ],
+    "roi_copy": "At ~60 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $75000.",
     "testimonial_match": "resort-spa"
   }
 ]
