@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "generate": "tsx scripts/generate.ts",
-    "generate:one": "tsx scripts/generate.ts --only"
+    "generate:one": "tsx scripts/generate.ts --only",
+    "preview": "tsx scripts/preview.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
