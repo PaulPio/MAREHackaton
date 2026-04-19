@@ -10,7 +10,7 @@ import {
   Salon,
   SalonSchema,
 } from "../lib/types.js";
-import { chatJSON } from "../lib/minimaxClient.js";
+import { chatJSON } from "../lib/geminiClient.js";
 import { loadPrompt, renderPrompt } from "../lib/loadPrompt.js";
 import { checkBanned, BannedHit } from "../lib/bannedPhrases.js";
 import { z } from "zod";
