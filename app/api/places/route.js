@@ -54,7 +54,6 @@ export async function GET(request) {
     // Map to the frontend's Salon structure
     const mappedSalons = uniquePlaces.map(place => {
       const seed = place.name.length + (place.rating ? Math.floor(place.rating * 10) : 0);
-      const fitScore = 65 + (seed % 35);
       
       const aestheticTags = ["modern-minimal", "classic-luxe", "organic-wellness", "clinical-medical"];
       const aesthetic_tag = aestheticTags[seed % aestheticTags.length];
@@ -80,16 +79,10 @@ export async function GET(request) {
         aesthetic_tag: aesthetic_tag,
         lat: place.geometry.location.lat,
         lng: place.geometry.location.lng,
-        fit_score: fitScore,
-        revenue_tier: fitScore > 85 ? "$2.5M - $5M" : "$1M - $2.5M",
+        fit_score: "N/A",
+        revenue_tier: "N/A",
         location_count: 1 + (seed % 3),
-        score_breakdown: {
-          revenue_tier: Math.floor(fitScore * 0.3),
-          luxury_signal: Math.floor(fitScore * 0.25),
-          aesthetic_fit: Math.floor(fitScore * 0.20),
-          location_match: Math.floor(fitScore * 0.15),
-          expansion_readiness: Math.floor(fitScore * 0.10)
-        },
+        score_breakdown: null,
         hook: "Detected strong local search volume and high Google Ratings. Ideal candidate for premium retail integration.",
         google_rating: place.rating ? place.rating.toFixed(1) : "4.8",
         review_count: place.user_ratings_total || (40 + (seed % 250)),

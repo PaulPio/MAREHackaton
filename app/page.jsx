@@ -209,7 +209,7 @@ const SalonCard = ({ salon, selected, onClick }) => {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <AestheticBadge tag={salon.aesthetic_tag} />
             <div style={{ fontSize: "11px", fontWeight: "bold", color: COLORS.key }}>
-              Score: {salon.fit_score}
+              Score: {salon.fit_score !== "N/A" ? salon.fit_score : "N/A"}
             </div>
           </div>
         </div>
@@ -293,7 +293,7 @@ const DetailPanel = ({ salon, onBack }) => {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "20px" }}>
           {[
-            { label: "Fit Score", value: `${salon.fit_score}/100` },
+            { label: "Fit Score", value: salon.fit_score !== "N/A" ? `${salon.fit_score}/100` : "N/A" },
             { label: "Est. Weekly Clients", value: salon.estimated_weekly_clients || "120+" },
             { label: "Retail Uplift", value: salon.projected_retail_uplift_usd ? `$${salon.projected_retail_uplift_usd.toLocaleString()}/mo` : "$4,500/mo" },
             { label: "Revenue Tier", value: salon.revenue_tier },
@@ -307,9 +307,9 @@ const DetailPanel = ({ salon, onBack }) => {
 
         <div style={{ marginBottom: "20px" }}>
           <div style={{ fontSize: "11px", color: COLORS.water300, fontFamily: "Manrope, sans-serif", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "10px" }}>Fit Score Breakdown</div>
-          {salon.score_breakdown && Object.entries(SCORE_BREAKDOWN).map(([key, max]) => (
+          {salon.score_breakdown && salon.fit_score !== "N/A" ? Object.entries(SCORE_BREAKDOWN).map(([key, max]) => (
             <ScoreBar key={key} label={key} value={salon.score_breakdown[key] || 0} max={max} />
-          ))}
+          )) : <div style={{ fontSize: "12px", color: COLORS.brown200, fontStyle: "italic", fontFamily: "Manrope, sans-serif" }}>Detailed metrics are N/A for live Google Search results.</div>}
         </div>
 
         <div style={{ marginBottom: "20px", padding: "14px", background: COLORS.brown100, borderRadius: "10px", borderLeft: `3px solid ${COLORS.brown}` }}>
@@ -482,7 +482,11 @@ export default function MaReSignal() {
   };
 
   const sorted = [...displayedSalons].sort((a, b) => {
-    if (sortBy === "fit_score") return b.fit_score - a.fit_score;
+    if (sortBy === "fit_score") {
+      const scoreA = a.fit_score === "N/A" ? 0 : a.fit_score;
+      const scoreB = b.fit_score === "N/A" ? 0 : b.fit_score;
+      return scoreB - scoreA;
+    }
     if (sortBy === "revenue") return (b.revenue_tier > a.revenue_tier ? 1 : -1);
     return a.name.localeCompare(b.name);
   });
@@ -581,7 +585,42 @@ export default function MaReSignal() {
         `}>
           
           {/* Active Panel Logic */}
-          {(!selected || (window.innerWidth < 768 && mobileView === "list")) ? (
+          {!location && !searchQuery ? (
+            <div className="flex flex-col h-full bg-white p-6 justify-center items-center overflow-y-auto">
+              <div style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "28px",
+                color: COLORS.extraDark,
+                marginBottom: "16px",
+                textAlign: "center",
+                lineHeight: "1.2"
+              }}>
+                Prospecting Hub
+              </div>
+              <p style={{ fontSize: "13px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", textAlign: "center", marginBottom: "30px", lineHeight: "1.6" }}>
+                Select a high-revenue hotspot below to instantly fetch real-time data from the Google Places API, revealing premium salons, spas, and barbershops.
+              </p>
+              
+              <div className="w-full flex flex-col gap-3">
+                {[
+                  { name: "Miami, FL", desc: "High density of luxury wellness clinics and resort spas. Prime market for premium retail.", lat: 25.7617, lng: -80.1918 },
+                  { name: "New York, NY", desc: "Dense urban market with high average revenue per salon. Focus on boutique aesthetics.", lat: 40.7128, lng: -74.0060 },
+                  { name: "Los Angeles, CA", desc: "Trend-setting wellness market. Ideal for organic and modern-minimal concepts.", lat: 34.0522, lng: -118.2437 },
+                  { name: "Chicago, IL", desc: "Strong localized neighborhood markets with loyal clientele.", lat: 41.8781, lng: -87.6298 }
+                ].map(loc => (
+                  <div 
+                    key={loc.name}
+                    onClick={() => selectSuggestion(loc)}
+                    className="p-4 border rounded-xl cursor-pointer hover:bg-[#F5F1EA] transition-all"
+                    style={{ borderColor: COLORS.light }}
+                  >
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: COLORS.key, fontFamily: "Manrope, sans-serif", marginBottom: "4px" }}>{loc.name}</div>
+                    <div style={{ fontSize: "12px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", lineHeight: "1.4" }}>{loc.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (!selected || (window.innerWidth < 768 && mobileView === "list")) ? (
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-3 border-b border-[#E2E2DE] shrink-0 bg-[#F5F1EA]/50">
                 <span className="text-[10px] text-[#7C9FA3] uppercase tracking-wider font-semibold">
