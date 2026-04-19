@@ -1,10 +1,13 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import { generateText } from "ai";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, "..");
+
+// Minimax API configuration
+const MINIMAX_API_URL = "https://minimax-m2.com/api/v1/chat/completions";
+const MINIMAX_MODEL = "MiniMax-M2.1";
 
 // Load prompt templates
 async function loadPrompt(filename) {
@@ -19,17 +22,43 @@ async function loadSalons() {
   return JSON.parse(data);
 }
 
-// Call LLM via Vercel AI Gateway
+// Call Minimax LLM
 async function callLLM(systemPrompt, userMessage) {
-  const { text } = await generateText({
-    model: "anthropic/claude-sonnet-4-20250514",
-    system: systemPrompt,
-    prompt: userMessage,
-    maxTokens: 1024,
-    temperature: 0.7,
+  const apiKey = process.env.MINIMAX_API_KEY;
+  
+  if (!apiKey) {
+    throw new Error("MINIMAX_API_KEY environment variable is not set");
+  }
+
+  const response = await fetch(MINIMAX_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: MINIMAX_MODEL,
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userMessage },
+      ],
+      temperature: 0.7,
+      max_tokens: 1024,
+    }),
   });
 
-  return text;
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Minimax API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json();
+  
+  if (data.choices && data.choices[0] && data.choices[0].message) {
+    return data.choices[0].message.content;
+  }
+  
+  throw new Error(`Unexpected Minimax response: ${JSON.stringify(data)}`);
 }
 
 // Parse JSON from LLM response
@@ -68,6 +97,7 @@ async function generateMicrositeContent(salon, micrositePrompt, voiceGuide) {
 // Main execution
 async function main() {
   console.log("Loading prompts and data...");
+  console.log(`Using Minimax model: ${MINIMAX_MODEL}`);
 
   // Load all resources
   const [voiceGuide, emailPrompt, micrositePrompt, salons] = await Promise.all([
