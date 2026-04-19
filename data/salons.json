@@ -2,6 +2,8 @@
   {
     "name": "DePasquale The Spa",
     "city": "Morris Plains, NJ",
+    "lat": 40.8290,
+    "lng": -74.4815,
     "website": "https://depasqualethespa.com",
     "instagram": "@depasqualethespa",
     "business_type": "day_spa",
@@ -24,6 +26,8 @@
   {
     "name": "IGK Salon Soho",
     "city": "New York, NY",
+    "lat": 40.7233,
+    "lng": -74.0030,
     "website": "https://www.igkhair.com/pages/salon",
     "instagram": "@igksalons",
     "business_type": "salon",
@@ -46,6 +50,8 @@
   {
     "name": "Rossano Ferretti Hairspa",
     "city": "New York, NY",
+    "lat": 40.7614,
+    "lng": -73.9776,
     "website": "https://rossanoferretti.com",
     "instagram": "@rossanoferrettiofficial",
     "business_type": "salon",
@@ -68,6 +74,8 @@
   {
     "name": "The Spa at Four Seasons Hotel at The Surf Club",
     "city": "Surfside, FL",
+    "lat": 25.8757,
+    "lng": -80.1217,
     "website": "https://www.fourseasons.com/surfside/spa/",
     "instagram": "@fssurfside",
     "business_type": "hotel_spa",
@@ -90,6 +98,8 @@
   {
     "name": "Aman Spa New York",
     "city": "New York, NY",
+    "lat": 40.7624,
+    "lng": -73.9738,
     "website": "https://www.aman.com/hotels/aman-new-york/spa",
     "instagram": "@amannewyork",
     "business_type": "hotel_spa",
@@ -112,6 +122,8 @@
   {
     "name": "Carillon Miami Wellness Resort",
     "city": "Miami Beach, FL",
+    "lat": 25.8505,
+    "lng": -80.1200,
     "website": "https://www.carillonhotel.com",
     "instagram": "@carillonhotel",
     "business_type": "wellness_clinic",
@@ -134,6 +146,8 @@
   {
     "name": "Marie Robinson Salon",
     "city": "New York, NY",
+    "lat": 40.7380,
+    "lng": -73.9930,
     "website": "https://marierobinsonsalon.com",
     "instagram": "@marierobinsonsalon",
     "business_type": "salon",
@@ -156,6 +170,8 @@
   {
     "name": "Maxine Salon",
     "city": "Chicago, IL",
+    "lat": 41.9058,
+    "lng": -87.6273,
     "website": "https://maxinesalon.com",
     "instagram": "@maxinesalon",
     "business_type": "salon",
@@ -178,6 +194,8 @@
   {
     "name": "Sally Hershberger",
     "city": "Los Angeles, CA",
+    "lat": 34.0522,
+    "lng": -118.2437,
     "website": "https://sallyhershberger.com",
     "instagram": "@sallyhershberger",
     "business_type": "salon",
@@ -200,6 +218,8 @@
   {
     "name": "Valmont Spa at The Carlyle",
     "city": "New York, NY",
+    "lat": 40.7744,
+    "lng": -73.9632,
     "website": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/wellness/spa",
     "instagram": "@rosewoodthecarlyle",
     "business_type": "hotel_spa",
