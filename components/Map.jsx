@@ -66,9 +66,9 @@ function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
   // Handle zoom out when unselecting a salon (clicking "Back")
   useEffect(() => {
     if (prevSelected && !selectedSalon) {
-      // If they had a center selected (like Miami), fly to that city's zoom (11)
-      // Otherwise, fly to the USA zoom (4)
-      map.flyTo(center || defaultCenter, center ? 11 : 4, { duration: 1.5, easeLinearity: 0.25 });
+      // Always zoom out to the local city level of the previously selected salon
+      const targetCenter = center ? [center.lat, center.lng] : [prevSelected.lat, prevSelected.lng];
+      map.flyTo(targetCenter, 11, { duration: 1.5, easeLinearity: 0.25 });
     }
     setPrevSelected(selectedSalon);
   }, [selectedSalon, prevSelected, center, map]);
