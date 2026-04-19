@@ -41,6 +41,14 @@ const SPA_IMAGES = [
   "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=150&q=80"
 ];
 
+const MOCK_REVIEWS = [
+  { author: "Sarah M.", text: "Absolutely stunning interior and the staff is incredibly professional. Will definitely be returning!", rating: 5 },
+  { author: "Jessica T.", text: "Best spa experience I've had in a long time. The retail selection is also top-tier.", rating: 5 },
+  { author: "Amanda R.", text: "Very relaxing atmosphere. A bit pricey but worth every penny.", rating: 4 },
+  { author: "Emily L.", text: "Beautiful aesthetic and great service. They use high quality products.", rating: 5 },
+  { author: "Rachel K.", text: "The attention to detail here is unmatched. Left feeling completely rejuvenated.", rating: 5 }
+];
+
 const SCORE_BREAKDOWN = {
   revenue_tier: 30,
   luxury_signal: 25,
@@ -66,15 +74,14 @@ function getDistance(lat1, lon1, lat2, lon2) {
 
 // Dynamically fetch salons from OpenStreetMap Overpass API
 async function fetchLocalSalons(lat, lng) {
-  const latOffset = 0.2; // roughly 15 miles radius
-  const lngOffset = 0.2;
   const query = `
     [out:json];
     (
-      node["leisure"="spa"](${lat - latOffset},${lng - lngOffset},${lat + latOffset},${lng + lngOffset});
-      node["shop"="beauty"](${lat - latOffset},${lng - lngOffset},${lat + latOffset},${lng + lngOffset});
+      node["leisure"="spa"](around:20000,${lat},${lng});
+      node["shop"="beauty"](around:20000,${lat},${lng});
+      node["shop"="hairdresser"](around:20000,${lat},${lng});
     );
-    out body 25;
+    out body 50;
   `;
   const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
   const data = await res.json();
@@ -304,10 +311,27 @@ const DetailPanel = ({ salon, onBack }) => {
             </span>
           </div>
           
-          <div style={{ fontSize: "13px", color: COLORS.dark, padding: "12px", background: COLORS.water50, borderRadius: "8px" }}>
+          <div style={{ fontSize: "13px", color: COLORS.dark, padding: "12px", background: COLORS.water50, borderRadius: "8px", marginBottom: "16px" }}>
             <strong>Contact Info:</strong><br/>
             📞 {salon.phone || "+1 (555) 123-4567"} <br/>
             {salon.website && <span style={{display: "block", marginTop: "4px"}}>🌐 <a href={salon.website} target="_blank" rel="noreferrer" style={{color: COLORS.key, textDecoration: "underline"}}>{salon.website}</a></span>}
+            {salon.instagram && <span style={{display: "block", marginTop: "4px"}}>📸 <a href={`https://instagram.com/${salon.instagram.replace("@","")}`} target="_blank" rel="noreferrer" style={{color: COLORS.key, textDecoration: "underline"}}>{salon.instagram}</a></span>}
+          </div>
+          
+          <div style={{ marginBottom: "20px" }}>
+            <div style={{ fontSize: "11px", color: COLORS.water300, fontFamily: "Manrope, sans-serif", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "10px" }}>Recent Reviews</div>
+            {[MOCK_REVIEWS[salon.name.length % MOCK_REVIEWS.length], MOCK_REVIEWS[(salon.name.length + 1) % MOCK_REVIEWS.length]].map((rev, i) => (
+              <div key={i} style={{ padding: "12px", background: COLORS.white, border: `0.5px solid ${COLORS.light}`, borderRadius: "8px", marginBottom: "8px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
+                  <span style={{ fontSize: "12px", fontWeight: "600", color: COLORS.extraDark }}>{rev.author}</span>
+                  <span style={{ color: "#00b67a", fontSize: "12px", letterSpacing: "1px" }}>{"★".repeat(rev.rating)}</span>
+                </div>
+                <div style={{ fontSize: "12px", color: COLORS.dark, lineHeight: "1.4" }}>"{rev.text}"</div>
+              </div>
+            ))}
+            <button onClick={() => window.open(`https://www.trustpilot.com/search?query=${encodeURIComponent(salon.name)}`, "_blank")} style={{ width: "100%", padding: "8px", background: "#00b67a", color: "white", borderRadius: "6px", fontSize: "12px", fontWeight: "bold", border: "none", cursor: "pointer", marginTop: "4px", fontFamily: "Manrope, sans-serif" }}>
+              Show more on Trustpilot
+            </button>
           </div>
         </div>
 
