@@ -40,7 +40,7 @@ const createStateIcon = (count) => {
   });
 };
 
-function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
+function MapContent({ salons, center, onSelectSalon, selectedSalon, onSelectCluster }) {
   const map = useMap();
   const [zoom, setZoom] = useState(map.getZoom());
   const [prevSelected, setPrevSelected] = useState(selectedSalon);
@@ -105,6 +105,9 @@ function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
           click: () => {
             // Smoothly fly into the state cluster
             map.flyTo([cluster.lat, cluster.lng], 10, { duration: 1.5, easeLinearity: 0.25 });
+            if (onSelectCluster) {
+              onSelectCluster(cluster);
+            }
           }
         }}
       />
@@ -135,7 +138,7 @@ function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
   ));
 }
 
-export default function Map({ salons, center, onSelectSalon, selectedSalon }) {
+export default function Map({ salons, center, onSelectSalon, selectedSalon, onSelectCluster }) {
   const defaultCenter = center || [39.8283, -98.5795]; // US Center
   const initialZoom = center ? 11 : 4;
 
@@ -146,7 +149,7 @@ export default function Map({ salons, center, onSelectSalon, selectedSalon }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
-        <MapContent salons={salons} center={center} onSelectSalon={onSelectSalon} selectedSalon={selectedSalon} />
+        <MapContent salons={salons} center={center} onSelectSalon={onSelectSalon} selectedSalon={selectedSalon} onSelectCluster={onSelectCluster} />
       </MapContainer>
     </div>
   );

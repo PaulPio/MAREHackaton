@@ -166,8 +166,9 @@ const AestheticBadge = ({ tag }) => {
 };
 
 const SalonCard = ({ salon, selected, onClick }) => {
-  const imageIdx = Math.abs((salon.name.length + (salon.fit_score || 0))) % SPA_IMAGES.length;
-  const imgUrl = SPA_IMAGES[imageIdx];
+  const fallbackIdx = Math.abs(salon.name.length) % SPA_IMAGES.length;
+  const fallbackImg = SPA_IMAGES[fallbackIdx];
+  const imgUrl = salon.image || fallbackImg;
 
   return (
     <div
@@ -186,6 +187,10 @@ const SalonCard = ({ salon, selected, onClick }) => {
           src={imgUrl} 
           alt={salon.name} 
           style={{ width: "64px", height: "64px", borderRadius: "10px", objectFit: "cover", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }} 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = fallbackImg;
+          }}
         />
         <div style={{ flex: 1 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -682,6 +687,10 @@ export default function MaReSignal() {
               center={location} 
               selectedSalon={selected}
               onSelectSalon={handleSelectSalon} 
+              onSelectCluster={(cluster) => {
+                setLocation({ lat: cluster.lat, lng: cluster.lng });
+                setSearchQuery(cluster.state);
+              }}
             />
           )}
         </div>
