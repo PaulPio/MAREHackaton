@@ -72,7 +72,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Dynamically fetch salons from OpenStreetMap Overpass API and supplement with mock data if needed
+// Dynamically fetch salons from OpenStreetMap Overpass API
 async function fetchLocalSalons(lat, lng) {
   const query = `
     [out:json];
@@ -81,40 +81,21 @@ async function fetchLocalSalons(lat, lng) {
       node["shop"="beauty"](around:40000,${lat},${lng});
       node["shop"="hairdresser"](around:40000,${lat},${lng});
       node["shop"="massage"](around:40000,${lat},${lng});
+      node["amenity"="barbershop"](around:40000,${lat},${lng});
+      
+      way["leisure"="spa"](around:40000,${lat},${lng});
+      way["shop"="beauty"](around:40000,${lat},${lng});
+      way["shop"="hairdresser"](around:40000,${lat},${lng});
+      way["shop"="massage"](around:40000,${lat},${lng});
+      way["amenity"="barbershop"](around:40000,${lat},${lng});
     );
-    out body 100;
+    out center 150;
   `;
   const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
   const data = await res.json();
   
   let elements = data.elements.filter(e => e.tags && e.tags.name);
   
-  // If we have less than 50 real results, we generate ultra-realistic mock data 
-  // around the searched lat/lng to ensure the user ALWAYS sees a rich, full map of 50 locations
-  if (elements.length < 50) {
-    const missing = 50 - elements.length;
-    const prefixes = ["Luxe", "Aura", "Serene", "Oasis", "Velvet", "Glow", "Radiance", "The Ivy", "Purity", "Silk", "Elysian", "Botanica"];
-    const suffixes = ["Spa", "Wellness", "Aesthetics", "Studio", "Retreat", "Lounge", "Clinic", "Salon", "MedSpa"];
-    
-    for (let i = 0; i < missing; i++) {
-      // Randomly distribute them within ~15 miles of the center
-      const rLat = lat + (Math.random() - 0.5) * 0.4;
-      const rLng = lng + (Math.random() - 0.5) * 0.4;
-      const rName = `${prefixes[i % prefixes.length]} ${suffixes[(i * 3) % suffixes.length]}`;
-      elements.push({
-        id: 999000000 + i,
-        lat: rLat,
-        lon: rLng,
-        tags: {
-          name: rName,
-          "addr:city": "Local Area",
-          leisure: i % 2 === 0 ? "spa" : undefined,
-          shop: i % 2 !== 0 ? "beauty" : undefined,
-        }
-      });
-    }
-  }
-
   // Cap at exactly 50 to optimize memory
   elements = elements.slice(0, 50);
   
@@ -123,7 +104,7 @@ async function fetchLocalSalons(lat, lng) {
       const fitScore = 65 + (seed % 35);
       const googleRating = (4.0 + ((seed % 10) / 10)).toFixed(1);
       const reviews = 40 + (seed % 250);
-      const isSpa = e.tags.leisure === "spa" || e.tags.shop === "beauty";
+      const isSpa = e.tags.leisure === "spa" || e.tags.shop === "beauty" || e.tags.shop === "massage";
       
       const phone = e.tags.phone || `+1 (${Math.floor(300 + (seed % 600))}) ${Math.floor(200 + (seed % 799))}-${Math.floor(1000 + (seed % 8999))}`;
       const website = e.tags.website || null;
@@ -131,14 +112,18 @@ async function fetchLocalSalons(lat, lng) {
       const aestheticTags = ["modern-minimal", "classic-luxe", "organic-wellness", "clinical-medical"];
       const aesthetic_tag = aestheticTags[seed % aestheticTags.length];
       
+      // Handle ways returning center coords
+      const eLat = e.lat || (e.center && e.center.lat);
+      const eLng = e.lon || (e.center && e.center.lon);
+      
       return {
         name: e.tags.name,
         city: e.tags["addr:city"] || "Local Area",
         state: e.tags["addr:state"] || "FL",
-        business_type: isSpa ? "day_spa" : "hair_salon",
+        business_type: isSpa ? "day_spa" : (e.tags.amenity === "barbershop" ? "barbershop" : "hair_salon"),
         aesthetic_tag,
-        lat: e.lat,
-        lng: e.lon,
+        lat: eLat,
+        lng: eLng,
         fit_score: fitScore,
         revenue_tier: fitScore > 85 ? "$2.5M - $5M" : "$1M - $2.5M",
         location_count: 1 + (seed % 3),
@@ -685,9 +670,9 @@ export default function MaReSignal() {
                     />
                   ))
                 )}
-                {/* Data Disclaimer */}
+                {/* Real Data Guarantee */}
                 <div style={{ padding: "20px", fontSize: "10px", color: COLORS.brown200, textAlign: "center", borderTop: `1px solid ${COLORS.light}` }}>
-                  <strong>Data Accuracy Disclaimer:</strong> For the purpose of this demonstration, if no static data is found in a searched area, real salons are scraped dynamically via OpenStreetMap and mathematically populated to ensure 50 guaranteed local results. Missing metrics such as Fit Scores, Google ratings, and revenue are realistically mocked to seamlessly demonstrate the UX of a fully populated location.
+                  <strong>Data Accuracy:</strong> This tool dynamically searches OpenStreetMap for real, physical locations. Metrics like Fit Scores and Google ratings are mocked for demonstration UX, but the spas and barbershops are real businesses.
                 </div>
               </div>
             </div>
