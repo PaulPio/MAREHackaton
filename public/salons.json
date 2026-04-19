@@ -19,7 +19,9 @@
     },
     "estimated_weekly_clients": 500,
     "projected_retail_uplift_usd": 350000,
-    "testimonial_angle": "High-volume luxury day spa looking to elevate their scalp care offerings and retail conversions."
+    "testimonial_angle": "High-volume luxury day spa looking to elevate their scalp care offerings and retail conversions.",
+    "outreach_email": "DePasquale The Spa's massive 26,000 sq ft facility in Morris Plains signals a capacity for the systematic approach MaRe enables. MaRe Eye, our trichologist-developed scalp diagnostic, elevates retail conversion from the industry-standard 3% to 40%+ by grounding every Philip Martin's recommendation in clinical data. We partner exclusively with venues that match our standard for luxury and head health — I'd like to explore whether that includes yours.\n— Rebecca",
+    "outreach_subject": "An exclusive system for DePasquale The Spa"
   },
   {
     "name": "IGK Salon Soho",
@@ -41,7 +43,9 @@
     },
     "estimated_weekly_clients": 300,
     "projected_retail_uplift_usd": 280000,
-    "testimonial_angle": "Trendsetting multi-location brand leveraging MaRe Eye to back up styling with clinical scalp health."
+    "testimonial_angle": "Trendsetting multi-location brand leveraging MaRe Eye to back up styling with clinical scalp health.",
+    "outreach_email": "IGK Salon Soho's trendsetting reputation and celebrity clientele align perfectly with MaRe's luxury positioning. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+ by systematically informing Philip Martin's product recommendations. We partner exclusively with salons that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for IGK Salon Soho"
   },
   {
     "name": "Rossano Ferretti Hairspa",
@@ -63,7 +67,9 @@
     },
     "estimated_weekly_clients": 150,
     "projected_retail_uplift_usd": 120000,
-    "testimonial_angle": "Global luxury chain incorporating objective scalp diagnostics to match their premium service pricing."
+    "testimonial_angle": "Global luxury chain incorporating objective scalp diagnostics to match their premium service pricing.",
+    "outreach_email": "Rossano Ferretti's renowned invisible haircut technique and ultra-exclusive clientele align perfectly with MaRe's luxury positioning. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+, informing bespoke Philip Martin's recommendations with clinical data. We partner exclusively with venues that match our standard — I'd like to explore whether Rossano Ferretti qualifies.\n— Rebecca",
+    "outreach_subject": "An exclusive system for Rossano Ferretti"
   },
   {
     "name": "The Spa at Four Seasons Hotel at The Surf Club",
@@ -85,7 +91,9 @@
     },
     "estimated_weekly_clients": 100,
     "projected_retail_uplift_usd": 95000,
-    "testimonial_angle": "Five-star hotel spa using MaRe to offer an exclusive, tech-forward wellness ritual to guests."
+    "testimonial_angle": "Five-star hotel spa using MaRe to offer an exclusive, tech-forward wellness ritual to guests.",
+    "outreach_email": "The Spa at Four Seasons' oceanfront location and UHNW clientele align perfectly with MaRe's luxury standard. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+ by informing every Philip Martin's product recommendation. We partner exclusively with venues that meet our standard for systematic head health — I'd like to explore whether that includes yours.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for The Spa at Four Seasons"
   },
   {
     "name": "Aman Spa New York",
@@ -107,7 +115,9 @@
     },
     "estimated_weekly_clients": 200,
     "projected_retail_uplift_usd": 250000,
-    "testimonial_angle": "The pinnacle of urban wellness integrating MaRe's clinical precision into their holistic luxury offerings."
+    "testimonial_angle": "The pinnacle of urban wellness integrating MaRe's clinical precision into their holistic luxury offerings.",
+    "outreach_email": "Aman Spa New York's three-story wellness center and integrative approach align with MaRe's clinical focus. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+ by tying every Philip Martin's recommendation to real scalp data. We partner exclusively with venues that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for Aman Spa New York"
   },
   {
     "name": "Carillon Miami Wellness Resort",
@@ -129,7 +139,9 @@
     },
     "estimated_weekly_clients": 400,
     "projected_retail_uplift_usd": 320000,
-    "testimonial_angle": "Tech-forward wellness resort adding MaRe Eye and Capsule to their robust biohacking menu."
+    "testimonial_angle": "Tech-forward wellness resort adding MaRe Eye and Capsule to their robust biohacking menu.",
+    "outreach_email": "Carillon Miami's investment in touchless tech signals a commitment to systematic wellness that aligns with MaRe's science-supported approach. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+ by tying every Philip Martin's recommendation to real scalp data. We partner exclusively with venues that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for Carillon Miami"
   },
   {
     "name": "Marie Robinson Salon",
@@ -151,7 +163,9 @@
     },
     "estimated_weekly_clients": 250,
     "projected_retail_uplift_usd": 180000,
-    "testimonial_angle": "Top-tier colorists using scalp health data to prescribe post-treatment retail care."
+    "testimonial_angle": "Top-tier colorists using scalp health data to prescribe post-treatment retail care.",
+    "outreach_email": "Marie Robinson Salon's reputation for impeccable color and retail expansion aligns perfectly with MaRe's systematic approach. MaRe Eye, our trichologist-developed scalp diagnostic, lifts Philip Martin's retail conversion from the industry-standard 3% to 40%+ by surfacing real scalp data. We partner exclusively with salons that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for Marie Robinson Salon"
   },
   {
     "name": "Maxine Salon",
@@ -173,7 +187,9 @@
     },
     "estimated_weekly_clients": 300,
     "projected_retail_uplift_usd": 210000,
-    "testimonial_angle": "Established regional leader modernizing their retail strategy with MaRe's diagnostic tools."
+    "testimonial_angle": "Established regional leader modernizing their retail strategy with MaRe's diagnostic tools.",
+    "outreach_email": "Maxine Salon's Gold Coast institution status signals precisely the kind of established clientele MaRe serves. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+, systematically tying every Philip Martin's recommendation to head health. We partner exclusively with salons that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "An exclusive system for Maxine Salon"
   },
   {
     "name": "Sally Hershberger",
@@ -195,7 +211,9 @@
     },
     "estimated_weekly_clients": 200,
     "projected_retail_uplift_usd": 200000,
-    "testimonial_angle": "Iconic bi-coastal brand adding rigorous Italian science to their celebrity-favored styling."
+    "testimonial_angle": "Iconic bi-coastal brand adding rigorous Italian science to their celebrity-favored styling.",
+    "outreach_email": "Sally Hershberger's bi-coastal presence setting Hollywood hair trends signals a strong fit for MaRe's luxury positioning. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+, tying every Philip Martin's recommendation to real scalp data. We partner exclusively with salons that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for Sally Hershberger"
   },
   {
     "name": "Valmont Spa at The Carlyle",
@@ -217,6 +235,8 @@
     },
     "estimated_weekly_clients": 60,
     "projected_retail_uplift_usd": 75000,
-    "testimonial_angle": "Boutique hotel spa offering highly personalized scalp rituals to discerning travelers."
+    "testimonial_angle": "Boutique hotel spa offering highly personalized scalp rituals to discerning travelers.",
+    "outreach_email": "Valmont Spa's location within The Carlyle signals a clientele perfectly matched to MaRe's luxury positioning. MaRe Eye, our trichologist-developed scalp diagnostic, lifts retail conversion from the industry-standard 3% to 40%+ by tying every Philip Martin's recommendation to real scalp data. We partner exclusively with venues that match our standard — I'd like to explore whether yours does.\n— Rebecca",
+    "outreach_subject": "A curated opportunity for Valmont Spa"
   }
 ]

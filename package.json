@@ -8,8 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "tsx scripts/generate.ts",
-    "generate:one": "tsx scripts/generate.ts --only",
+    "generate": "tsx scripts/generate.ts && tsx scripts/merge.ts",
+    "generate:one": "tsx scripts/generate.ts --only && tsx scripts/merge.ts",
+    "merge": "tsx scripts/merge.ts",
     "preview": "tsx scripts/preview.ts"
   },
   "dependencies": {
