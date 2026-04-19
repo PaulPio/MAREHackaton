@@ -1,14 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { generateText } from "ai";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, "..");
-
-// Minimax API configuration
-const MINIMAX_API_KEY = process.env.MINIMAX_API_KEY;
-const MINIMAX_GROUP_ID = process.env.MINIMAX_GROUP_ID || "";
-const MINIMAX_API_URL = "https://api.minimax.chat/v1/text/chatcompletion_v2";
 
 // Load prompt templates
 async function loadPrompt(filename) {
@@ -23,50 +19,17 @@ async function loadSalons() {
   return JSON.parse(data);
 }
 
-// Call Minimax API
-async function callMinimax(systemPrompt, userMessage) {
-  const response = await fetch(MINIMAX_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${MINIMAX_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "abab6.5s-chat",
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt,
-        },
-        {
-          role: "user",
-          content: userMessage,
-        },
-      ],
-      max_tokens: 1024,
-      temperature: 0.7,
-    }),
+// Call LLM via Vercel AI Gateway
+async function callLLM(systemPrompt, userMessage) {
+  const { text } = await generateText({
+    model: "anthropic/claude-sonnet-4-20250514",
+    system: systemPrompt,
+    prompt: userMessage,
+    maxTokens: 1024,
+    temperature: 0.7,
   });
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Minimax API error: ${response.status} - ${error}`);
-  }
-
-  const data = await response.json();
-  console.log("[v0] Minimax API response:", JSON.stringify(data, null, 2));
-  
-  // Handle different response structures
-  if (data.choices && data.choices[0]) {
-    return data.choices[0].message.content;
-  } else if (data.reply) {
-    return data.reply;
-  } else if (data.output) {
-    return data.output;
-  } else {
-    console.error("[v0] Unexpected response structure:", Object.keys(data));
-    throw new Error("Unexpected API response structure");
-  }
+  return text;
 }
 
 // Parse JSON from LLM response
@@ -89,7 +52,7 @@ async function generateEmail(salon, emailPrompt, voiceGuide) {
   const systemPrompt = `${voiceGuide}\n\n---\n\n${emailPrompt}`;
   const userMessage = `Generate a personalized outreach email for this salon:\n\n${JSON.stringify(salon, null, 2)}`;
 
-  const content = await callMinimax(systemPrompt, userMessage);
+  const content = await callLLM(systemPrompt, userMessage);
   return parseJsonResponse(content, salon.name);
 }
 
@@ -98,18 +61,12 @@ async function generateMicrositeContent(salon, micrositePrompt, voiceGuide) {
   const systemPrompt = `${voiceGuide}\n\n---\n\n${micrositePrompt}`;
   const userMessage = `Generate personalized microsite content for this salon:\n\n${JSON.stringify(salon, null, 2)}`;
 
-  const content = await callMinimax(systemPrompt, userMessage);
+  const content = await callLLM(systemPrompt, userMessage);
   return parseJsonResponse(content, salon.name);
 }
 
 // Main execution
 async function main() {
-  if (!MINIMAX_API_KEY) {
-    console.error("Error: MINIMAX_API_KEY environment variable is required");
-    console.error("Set it with: export MINIMAX_API_KEY=your_api_key");
-    process.exit(1);
-  }
-
   console.log("Loading prompts and data...");
 
   // Load all resources
