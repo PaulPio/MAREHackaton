@@ -396,3 +396,25 @@ When generating any code or content for this project:
 6. **Check outputs against banned-phrases list** before considering them done.
 7. **All LLM calls should be single-shot with strict JSON output** — no streaming, no retries during demo.
 8. **Assume the demo runs offline** — bake all generated content into JSON files ahead of time. No live API calls during the pitch.
+
+---
+
+## ▶️ Running the Generator (Person 2)
+
+Prereqs: Node 20+, a MiniMax API key.
+
+```bash
+npm install
+cp .env.example .env        # then fill in MINIMAX_API_KEY
+npm run generate            # generate for all salons in data/salons.json
+npm run generate:one -- salon-by-the-sea-miami  # single salon during iteration
+```
+
+Outputs:
+
+- `data/generated_emails.json`
+- `data/generated_microsite_content.json`
+
+Both are consumed by Person 3's UI. Commit them — the demo must run offline.
+
+The generator runs a banned-phrase scan after every call and prints warnings. Treat any warning as a blocker for the hero salon; regenerate until clean.
