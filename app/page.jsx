@@ -224,7 +224,7 @@ const SalonCard = ({ salon, selected, onClick }) => {
 };
 
 const DetailPanel = ({ salon, onBack }) => {
-  const [emailVisible, setEmailVisible] = useState(false);
+  const [scriptsModalVisible, setScriptsModalVisible] = useState(false);
 
   if (!salon) return (
     <div className="flex flex-col items-center justify-center h-full gap-3 bg-white">
@@ -335,12 +335,12 @@ const DetailPanel = ({ salon, onBack }) => {
 
         <div style={{ marginBottom: "20px" }}>
           <button
-            onClick={() => setEmailVisible(!emailVisible)}
+            onClick={() => setScriptsModalVisible(true)}
             style={{
-              width: "100%", padding: "10px 16px",
-              background: emailVisible ? COLORS.key : "transparent",
-              color: emailVisible ? COLORS.white : COLORS.key,
-              border: `1px solid ${COLORS.key}`,
+              width: "100%", padding: "12px 16px",
+              background: COLORS.key,
+              color: COLORS.white,
+              border: "none",
               borderRadius: "8px",
               fontFamily: "Manrope, sans-serif",
               fontSize: "12px",
@@ -348,25 +348,80 @@ const DetailPanel = ({ salon, onBack }) => {
               cursor: "pointer",
               letterSpacing: "0.04em",
               textTransform: "uppercase",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
               transition: "all 0.2s ease",
             }}
           >
-            {emailVisible ? "Hide Draft Email" : "View Draft Email"}
+            Generate Outreach Scripts
           </button>
-          {emailVisible && (
-            <div style={{
-              marginTop: "10px", padding: "16px",
-              background: COLORS.white, border: `0.5px solid ${COLORS.light}`,
-              borderRadius: "10px",
-            }}>
-              <div style={{ fontSize: "10px", color: COLORS.brown200, fontFamily: "Manrope, sans-serif", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>Draft · Pending Approval</div>
-              <p style={{ fontSize: "13px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", lineHeight: "1.7", margin: 0, whiteSpace: "pre-wrap" }}>
-                {salon.outreach_email || `Hi ${salon.name} Team,\n\nWe noticed your incredible Google score of ${salon.google_rating || salon.trustpilot_score || "4.8"} and the amazing aesthetic of your ${salon.city} location.\n\nWe'd love to partner to elevate your retail offering...`}
-              </p>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Scripts Modal Overlay */}
+      {scriptsModalVisible && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
+          backgroundColor: "rgba(0,0,0,0.5)", zIndex: 99999,
+          display: "flex", justifyContent: "center", alignItems: "center"
+        }}>
+          <div style={{
+            background: COLORS.white, padding: "24px", borderRadius: "16px",
+            width: "90%", maxWidth: "500px", position: "relative",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+            maxHeight: "90vh", overflowY: "auto"
+          }}>
+            <button 
+              onClick={() => setScriptsModalVisible(false)} 
+              style={{ position: "absolute", top: "16px", right: "20px", background: "none", border: "none", cursor: "pointer", fontSize: "24px", color: COLORS.brown200 }}
+            >
+              ×
+            </button>
+            
+            <h2 style={{ fontFamily: "'Playfair Display', serif", color: COLORS.extraDark, marginBottom: "8px", fontSize: "22px", marginTop: 0 }}>Outreach Scripts</h2>
+            <p style={{ fontSize: "12px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", marginBottom: "20px" }}>Generated specifically for {salon.name} in {salon.city}.</p>
+            
+            {/* Email Script */}
+            <div style={{ marginBottom: "24px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                <div style={{ fontSize: "11px", color: COLORS.brown, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: "bold", fontFamily: "Manrope, sans-serif" }}>Email (Collaboration)</div>
+                <button 
+                  onClick={(e) => { 
+                    navigator.clipboard.writeText(`Hi ${salon.name} Team,\n\nI’ve been following your work and absolutely love the vibe you’ve cultivated at your ${salon.city} location! Your aesthetic aligns perfectly with our brand.\n\nWe’re currently exploring partnerships with high-end wellness spaces in ${salon.city} and would love to discuss a potential collaboration. Are you open to a quick chat next week to see if there's a mutual fit?\n\nBest,\n[Your Name]`); 
+                    e.target.innerText = "Copied!"; 
+                    setTimeout(() => e.target.innerText = "Copy", 2000); 
+                  }} 
+                  style={{ fontSize: "10px", color: COLORS.key, background: "none", border: `1px solid ${COLORS.key}`, padding: "4px 10px", borderRadius: "4px", cursor: "pointer", fontFamily: "Manrope, sans-serif", fontWeight: "bold" }}
+                >
+                  Copy
+                </button>
+              </div>
+              <div style={{ background: COLORS.water50, padding: "16px", borderRadius: "8px", fontSize: "13px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                {`Hi ${salon.name} Team,\n\nI’ve been following your work and absolutely love the vibe you’ve cultivated at your ${salon.city} location! Your aesthetic aligns perfectly with our brand.\n\nWe’re currently exploring partnerships with high-end wellness spaces in ${salon.city} and would love to discuss a potential collaboration. Are you open to a quick chat next week to see if there's a mutual fit?\n\nBest,\n[Your Name]`}
+              </div>
+            </div>
+
+            {/* Instagram Script */}
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                <div style={{ fontSize: "11px", color: COLORS.brown, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: "bold", fontFamily: "Manrope, sans-serif" }}>Instagram DM (Short)</div>
+                <button 
+                  onClick={(e) => { 
+                    navigator.clipboard.writeText(`Hey ${salon.name}! ✨ Obsessed with the aesthetic of your ${salon.city} space. We're looking for premium wellness partners to collab with right now—let us know who we can chat with about this!`); 
+                    e.target.innerText = "Copied!"; 
+                    setTimeout(() => e.target.innerText = "Copy", 2000); 
+                  }} 
+                  style={{ fontSize: "10px", color: COLORS.key, background: "none", border: `1px solid ${COLORS.key}`, padding: "4px 10px", borderRadius: "4px", cursor: "pointer", fontFamily: "Manrope, sans-serif", fontWeight: "bold" }}
+                >
+                  Copy
+                </button>
+              </div>
+              <div style={{ background: COLORS.water50, padding: "16px", borderRadius: "8px", fontSize: "13px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                {`Hey ${salon.name}! ✨ Obsessed with the aesthetic of your ${salon.city} space. We're looking for premium wellness partners to collab with right now—let us know who we can chat with about this!`}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
