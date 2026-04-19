@@ -282,7 +282,7 @@ const DetailPanel = ({ salon, onBack }) => {
                   <span style={{ fontSize: "12px", fontWeight: "600", color: COLORS.extraDark }}>{rev.author}</span>
                   <span style={{ color: "#F4B400", fontSize: "12px", letterSpacing: "1px" }}>{"★".repeat(rev.rating)}</span>
                 </div>
-                <div style={{ fontSize: "12px", color: COLORS.dark, lineHeight: "1.4" }}>"{rev.text}"</div>
+                <div style={{ fontSize: "12px", color: COLORS.dark, lineHeight: "1.4" }}>&quot;{rev.text}&quot;</div>
               </div>
             ))}
             <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(salon.name + " " + salon.city)}`, "_blank")} style={{ width: "100%", padding: "8px", background: "#4285F4", color: "white", borderRadius: "6px", fontSize: "12px", fontWeight: "bold", border: "none", cursor: "pointer", marginTop: "4px", fontFamily: "Manrope, sans-serif" }}>
@@ -315,7 +315,7 @@ const DetailPanel = ({ salon, onBack }) => {
         <div style={{ marginBottom: "20px", padding: "14px", background: COLORS.brown100, borderRadius: "10px", borderLeft: `3px solid ${COLORS.brown}` }}>
           <div style={{ fontSize: "10px", color: COLORS.brown, fontFamily: "Manrope, sans-serif", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "6px" }}>Signal</div>
           <p style={{ fontSize: "13px", color: COLORS.dark, fontFamily: "Manrope, sans-serif", lineHeight: "1.5", margin: 0, fontStyle: "italic" }}>
-            "{salon.hook}"
+            &quot;{salon.hook}&quot;
           </p>
         </div>
 
