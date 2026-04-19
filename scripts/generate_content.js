@@ -54,7 +54,19 @@ async function callMinimax(systemPrompt, userMessage) {
   }
 
   const data = await response.json();
-  return data.choices[0].message.content;
+  console.log("[v0] Minimax API response:", JSON.stringify(data, null, 2));
+  
+  // Handle different response structures
+  if (data.choices && data.choices[0]) {
+    return data.choices[0].message.content;
+  } else if (data.reply) {
+    return data.reply;
+  } else if (data.output) {
+    return data.output;
+  } else {
+    console.error("[v0] Unexpected response structure:", Object.keys(data));
+    throw new Error("Unexpected API response structure");
+  }
 }
 
 // Parse JSON from LLM response
