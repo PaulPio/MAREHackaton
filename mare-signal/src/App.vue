@@ -28,8 +28,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import MicrositePage from './components/MicrositePage.vue'
-import salonsData from './data/salons.json'
-import micrositeData from './data/generated_microsite_content.json'
+import salonsData from '../data/salons.json'
+import micrositeData from '../data/generated_microsite_content.json'
 
 const salons = ref(salonsData)
 const micrositeContents = ref(micrositeData)
