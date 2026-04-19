@@ -51,8 +51,17 @@ export async function GET(request) {
     // Cap at 50 to optimize memory
     uniquePlaces = uniquePlaces.slice(0, 50);
 
+    // Fetch details (phone and website) for the top 50 places in parallel
+    const detailsPromises = uniquePlaces.map(place => 
+      fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&fields=formatted_phone_number,website&key=${GOOGLE_API_KEY}`)
+        .then(res => res.json())
+        .catch(() => ({}))
+    );
+    const detailsResponses = await Promise.all(detailsPromises);
+
     // Map to the frontend's Salon structure
-    const mappedSalons = uniquePlaces.map(place => {
+    const mappedSalons = uniquePlaces.map((place, idx) => {
+      const details = detailsResponses[idx].result || {};
       const seed = place.name.length + (place.rating ? Math.floor(place.rating * 10) : 0);
       
       const aestheticTags = ["modern-minimal", "classic-luxe", "organic-wellness", "clinical-medical"];
@@ -102,8 +111,8 @@ export async function GET(request) {
         hook: "Detected strong local search volume and high Google Ratings. Ideal candidate for premium retail integration.",
         google_rating: place.rating ? place.rating.toFixed(1) : "4.8",
         review_count: place.user_ratings_total || (40 + (seed % 250)),
-        phone: null, // Basic nearbysearch doesn't return phone, frontend will fallback to mock
-        website: null, 
+        phone: details.formatted_phone_number || null,
+        website: details.website || null, 
         is_dynamic: true,
       };
     });
