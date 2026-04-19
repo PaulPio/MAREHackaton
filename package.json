@@ -1,0 +1,11 @@
+{
+  "name": "mare-hackathon",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate": "node --env-file-if-exists=/vercel/share/.env.project scripts/generate_content.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  }
+}

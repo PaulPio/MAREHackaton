@@ -1,0 +1,38 @@
+[
+  {
+    "id": "demo-001",
+    "name": "The Skin Studio",
+    "city": "Austin",
+    "state": "TX",
+    "personalization_hook": "Known for medical-grade facials and clinical approach to skincare",
+    "services": ["medical facials", "chemical peels", "microneedling", "LED therapy"],
+    "price_tier": "luxury",
+    "specialties": ["corrective skincare", "anti-aging treatments"],
+    "owner_name": "Dr. Sarah Chen",
+    "years_established": 12
+  },
+  {
+    "id": "demo-002",
+    "name": "Radiance Collective",
+    "city": "Denver",
+    "state": "CO",
+    "personalization_hook": "Boutique wellness space blending holistic philosophy with clinical efficacy",
+    "services": ["facials", "body treatments", "wellness rituals", "massage"],
+    "price_tier": "luxury",
+    "specialties": ["holistic skincare", "body wellness", "relaxation rituals"],
+    "owner_name": "Maria Gonzalez",
+    "years_established": 8
+  },
+  {
+    "id": "demo-003",
+    "name": "Éclat Spa",
+    "city": "Miami",
+    "state": "FL",
+    "personalization_hook": "High-end destination spa catering to international clientele seeking results-driven treatments",
+    "services": ["luxury facials", "body contouring", "hydrafacials", "eye treatments"],
+    "price_tier": "luxury",
+    "specialties": ["anti-aging", "brightening", "hydration protocols"],
+    "owner_name": "Isabella Reyes",
+    "years_established": 15
+  }
+]
