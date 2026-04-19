@@ -19,7 +19,7 @@ import { z } from "zod";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, "..");
-const DATA = resolve(ROOT, "data");
+const DATA = resolve(ROOT, "mare-signal/data");
 
 const SALONS_PATH = resolve(DATA, "salons.json");
 const EMAILS_OUT = resolve(DATA, "generated_emails.json");

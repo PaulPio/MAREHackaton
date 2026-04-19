@@ -39,7 +39,7 @@ Vite is configured to allow file imports from the root `data/` folder via `serve
 
 ### Data Flow
 Frontend components import data directly:
-`import salonsData from '../../../data/salons.json'`
+`import salonsData from '../../data/salons.json'`
 
 ## Brand Voice
 All AI-generated copy follows `prompts/mare_voice.md`.

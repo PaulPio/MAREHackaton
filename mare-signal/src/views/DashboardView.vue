@@ -58,7 +58,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import MapComponent from '../components/MapComponent.vue'
-import salonsData from '../../../data/salons.json'
+import salonsData from '../../data/salons.json'
 
 const router = useRouter()
 const salons = ref(salonsData)

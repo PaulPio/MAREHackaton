@@ -11,8 +11,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import MicrositePage from '../components/MicrositePage.vue'
-import salonsData from '../../../data/salons.json'
-import micrositeData from '../../../data/generated_microsite_content.json'
+import salonsData from '../../data/salons.json'
+import micrositeData from '../../data/generated_microsite_content.json'
 
 const route = useRoute()
 const activeSalonId = computed(() => route.params.id)

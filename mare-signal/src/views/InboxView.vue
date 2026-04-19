@@ -87,8 +87,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import salonsData from '../../../data/salons.json'
-import emailsData from '../../../data/generated_emails.json' // fetch generated emails
+import salonsData from '../../data/salons.json'
+import emailsData from '../../data/generated_emails.json' // fetch generated emails
 
 const router = useRouter()
 const salons = ref(salonsData.slice(0, 8)) // active deals
