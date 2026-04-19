@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "tsx scripts/generate.ts && tsx scripts/merge.ts",
-    "generate:one": "tsx scripts/generate.ts --only && tsx scripts/merge.ts",
+    "dev": "npm run dev --prefix mare-signal",
+    "generate": "tsx scripts/generate.ts",
+    "generate:one": "tsx scripts/generate.ts --only",
     "merge": "tsx scripts/merge.ts",
-    "generate:agent": "tsx scripts/generateAgent.ts && tsx scripts/merge.ts",
+    "generate:agent": "tsx scripts/generateAgent.ts",
     "preview": "tsx scripts/preview.ts"
   },
   "dependencies": {

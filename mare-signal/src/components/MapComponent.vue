@@ -27,7 +27,7 @@
       <!-- Zoomed in individual salons -->
       <template v-else>
         <l-marker
-          v-for="salon in salons"
+          v-for="salon in filteredSalons"
           :key="salon.name"
           :lat-lng="[salon.lat, salon.lng]"
           :icon="markerIcon"
