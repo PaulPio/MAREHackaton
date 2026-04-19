@@ -5,11 +5,13 @@ import { fileURLToPath } from "node:url";
 import {
   GeneratedEmail,
   GeneratedEmailSchema,
+  MicrositeContent,
+  MicrositeContentSchema,
   Salon,
   SalonSchema,
 } from "../lib/types.js";
-import { agentLoop, type AgentMessage } from "../lib/geminiClient.js";
-import { loadPrompt } from "../lib/loadPrompt.js";
+import { agentLoop, chatJSON, type AgentMessage } from "../lib/geminiClient.js";
+import { loadPrompt, renderPrompt } from "../lib/loadPrompt.js";
 import { checkBanned } from "../lib/bannedPhrases.js";
 import { AGENT_TOOLS, executeAgentTool } from "../lib/agentTools.js";
 import { z } from "zod";
@@ -21,6 +23,7 @@ const DATA = resolve(ROOT, "data");
 
 const SALONS_PATH = resolve(DATA, "salons.json");
 const EMAILS_OUT = resolve(DATA, "generated_emails.json");
+const MICROSITES_OUT = resolve(DATA, "generated_microsite_content.json");
 
 /* ─── Agent system prompt ─── */
 
@@ -183,6 +186,25 @@ async function generateEmailAgent(salon: Salon): Promise<GeneratedEmail> {
   return validated;
 }
 
+/* ─── Microsite generation (single-shot, not agentic) ─── */
+
+async function generateMicrosite(salon: Salon, template: string): Promise<MicrositeContent> {
+  const voice = loadPrompt("mare_voice.md");
+  const user = renderPrompt(template, { salon_json: JSON.stringify(salon, null, 2) });
+  const { parsed } = await chatJSON<Omit<MicrositeContent, "salon_id">>(
+    [
+      { role: "system", content: voice },
+      { role: "user", content: user },
+    ],
+    { temperature: 0.3, maxTokens: 900 },
+  );
+  const validated = MicrositeContentSchema.parse({
+    salon_id: salon.id,
+    ...parsed,
+  });
+  return validated;
+}
+
 /* ─── Main ─── */
 
 async function main(): Promise<void> {
@@ -197,16 +219,24 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  console.log(`\n🔄 MaRe Agent — generating emails for ${salons.length} salon(s)\n`);
+  console.log(`\n🔄 MaRe Agent — generating emails + microsites for ${salons.length} salon(s)\n`);
 
-  // Load existing emails to preserve work done before any crash
+  const micrositeTemplate = loadPrompt("microsite_generator.md");
+
+  // Load existing data to preserve work done before any crash
   let existingEmails: GeneratedEmail[] = [];
   try {
     existingEmails = JSON.parse(readFileSync(EMAILS_OUT, "utf8")) as GeneratedEmail[];
   } catch { /* file may not exist yet */ }
 
+  let existingMicrosites: MicrositeContent[] = [];
+  try {
+    existingMicrosites = JSON.parse(readFileSync(MICROSITES_OUT, "utf8")) as MicrositeContent[];
+  } catch { /* file may not exist yet */ }
+
   const existingIds = new Set(existingEmails.map((e) => e.salon_id));
   const emails: GeneratedEmail[] = [...existingEmails];
+  const microsites: MicrositeContent[] = [...existingMicrosites];
   let bannedWarnCount = 0;
   let skipped = 0;
 
@@ -222,11 +252,13 @@ async function main(): Promise<void> {
 
     console.log(`→ ${salon.id} (${salon.name})`);
     try {
+      // 1. Generate email via agent loop (with tool-use)
+      console.log(`  📧 email (agent loop)`);
       const email = await generateEmailAgent(salon);
 
       // Replace existing entry or append
-      const existingIdx = emails.findIndex((e) => e.salon_id === salon.id);
-      if (existingIdx >= 0) emails[existingIdx] = email;
+      const existingEmailIdx = emails.findIndex((e) => e.salon_id === salon.id);
+      if (existingEmailIdx >= 0) emails[existingEmailIdx] = email;
       else emails.push(email);
 
       // Post-agent verification
@@ -238,11 +270,24 @@ async function main(): Promise<void> {
           console.log(`      "${h.phrase}" → ${h.context}`);
         }
       } else {
-        console.log(`    ✓ clean — no banned phrases`);
+        console.log(`    ✓ email clean — no banned phrases`);
       }
+
+      // Brief pause before microsite call to respect rate limits
+      await new Promise((r) => setTimeout(r, 2000));
+
+      // 2. Generate microsite via single-shot call
+      console.log(`  🌐 microsite (single-shot)`);
+      const microsite = await generateMicrosite(salon, micrositeTemplate);
+
+      const existingMsIdx = microsites.findIndex((m) => m.salon_id === salon.id);
+      if (existingMsIdx >= 0) microsites[existingMsIdx] = microsite;
+      else microsites.push(microsite);
+      console.log(`    ✓ microsite generated`);
 
       // Write incrementally so a crash doesn't lose work
       writeFileSync(EMAILS_OUT, JSON.stringify(emails, null, 2) + "\n");
+      writeFileSync(MICROSITES_OUT, JSON.stringify(microsites, null, 2) + "\n");
     } catch (err) {
       console.error(`  ✗ failed: ${(err as Error).message}`);
       throw err;
@@ -255,8 +300,9 @@ async function main(): Promise<void> {
   }
 
   const generated = salons.length - skipped;
-  console.log(`\n✓ ${generated} generated, ${skipped} skipped (already done) — ${emails.length} total in file`);
-  console.log(`  ${EMAILS_OUT}`);
+  console.log(`\n✓ ${generated} generated, ${skipped} skipped (already done)`);
+  console.log(`  ${emails.length} emails  → ${EMAILS_OUT}`);
+  console.log(`  ${microsites.length} microsites → ${MICROSITES_OUT}`);
   if (bannedWarnCount) {
     console.log(`  ⚠ ${bannedWarnCount} email(s) still have banned-phrase warnings after agent revision`);
   } else {
