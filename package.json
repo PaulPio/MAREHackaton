@@ -5,7 +5,5 @@
   "scripts": {
     "generate": "node --env-file-if-exists=/vercel/share/.env.project scripts/generate_content.js"
   },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0"
-  }
+  "dependencies": {}
 }
