@@ -623,9 +623,14 @@ export default function MaReSignal() {
           ) : (!selected || (window.innerWidth < 768 && mobileView === "list")) ? (
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-3 border-b border-[#E2E2DE] shrink-0 bg-[#F5F1EA]/50">
-                <span className="text-[10px] text-[#7C9FA3] uppercase tracking-wider font-semibold">
-                  {status === "loading" ? "Scraping Local Salons..." : `${displayedSalons.length} results near ${searchQuery || "you"}`}
-                </span>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => { setLocation(null); setSearchQuery(""); }} className="p-1 hover:bg-white rounded-md transition-colors cursor-pointer border border-[#E2E2DE]" title="Back to Hub">
+                    <ChevronLeft size={14} color={COLORS.key} />
+                  </button>
+                  <span className="text-[10px] text-[#7C9FA3] uppercase tracking-wider font-semibold">
+                    {status === "loading" ? "Scraping Local Salons..." : `${displayedSalons.length} results`}
+                  </span>
+                </div>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}

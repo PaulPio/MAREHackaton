@@ -71,12 +71,28 @@ export async function GET(request) {
         city = parts[parts.length - 1].trim();
       }
 
+      // Handle Real Images
+      let imageUrl = null;
+      if (place.photos && place.photos.length > 0) {
+        imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${place.photos[0].photo_reference}&key=${GOOGLE_API_KEY}`;
+      } else {
+        // Fallback to beautiful Unsplash spa/salon images
+        const fallbacks = [
+          "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=400&q=80",
+          "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80",
+          "https://images.unsplash.com/photo-1516975080661-460b3cb1c1d0?auto=format&fit=crop&w=400&q=80",
+          "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=400&q=80"
+        ];
+        imageUrl = fallbacks[seed % fallbacks.length];
+      }
+
       return {
         name: place.name,
         city: city,
         state: "FL", // We can't perfectly extract state from vicinity without Geocoding API, so we leave it or mock it
         business_type: business_type,
         aesthetic_tag: aesthetic_tag,
+        image: imageUrl,
         lat: place.geometry.location.lat,
         lng: place.geometry.location.lng,
         fit_score: "N/A",
