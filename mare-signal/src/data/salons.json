@@ -1,0 +1,71 @@
+[
+  {
+    "id": "the-lux-atelier-nyc",
+    "name": "The Lux Atelier",
+    "city": "New York, NY",
+    "website": "https://theluxatelier.example",
+    "instagram": "@theluxatelier",
+    "business_type": "salon",
+    "revenue_tier": "$2M-$5M",
+    "location_count": 3,
+    "aesthetic": ["modern-minimal", "classic-luxe"],
+    "personalization_hook": "Named Best Salon in NYC by New York Magazine two years running, with a flagship on the Upper East Side serving an exclusive clientele",
+    "fit_score": 94,
+    "score_reasons": [
+      "$2M+ revenue tier (25pts)",
+      "NYC HNW location (15pts)",
+      "Aesthetic match — modern minimal + classic luxe (20pts)",
+      "Multi-location expansion readiness (10pts)",
+      "New York Magazine award luxury signal (24pts)"
+    ],
+    "estimated_weekly_clients": 85,
+    "projected_retail_uplift_annual_usd": 398000,
+    "testimonial_archetype": "urban-flagship-multi-location"
+  },
+  {
+    "id": "sola-wellness-miami",
+    "name": "Sola Wellness Studio",
+    "city": "Coral Gables, FL",
+    "website": "https://solawellness.example",
+    "instagram": "@solawellnessstudio",
+    "business_type": "day_spa",
+    "revenue_tier": "$1M-$2M",
+    "location_count": 2,
+    "aesthetic": ["organic-wellness", "modern-minimal"],
+    "personalization_hook": "Recently opened a second location in Palm Beach with a dedicated scalp wellness floor curated around clean, biodynamic protocols",
+    "fit_score": 87,
+    "score_reasons": [
+      "$1M+ revenue tier (20pts)",
+      "Palm Beach HNW location (15pts)",
+      "Aesthetic match — organic wellness (20pts)",
+      "Recent expansion signals growth (10pts)",
+      "Biodynamic alignment (22pts)"
+    ],
+    "estimated_weekly_clients": 40,
+    "projected_retail_uplift_annual_usd": 187000,
+    "testimonial_archetype": "boutique-multi-location"
+  },
+  {
+    "id": "rosewood-spa-aspen",
+    "name": "Rosewood Spa Aspen",
+    "city": "Aspen, CO",
+    "website": "https://rosewoodspas.example/aspen",
+    "instagram": "@rosewoodhotels",
+    "business_type": "hotel_spa",
+    "revenue_tier": "$5M+",
+    "location_count": 12,
+    "aesthetic": ["classic-luxe", "celebrity-haunt"],
+    "personalization_hook": "Forbes Five-Star certified and preferred by a global ultra-high-net-worth clientele who expect protocol-led, trichologist-grade experiences",
+    "fit_score": 98,
+    "score_reasons": [
+      "$5M+ revenue tier (30pts)",
+      "Aspen HNW destination (15pts)",
+      "Classic luxe aesthetic (20pts)",
+      "Forbes Five-Star luxury signal (25pts)",
+      "Global multi-property expansion readiness (8pts)"
+    ],
+    "estimated_weekly_clients": 140,
+    "projected_retail_uplift_annual_usd": 655000,
+    "testimonial_archetype": "luxury-hotel-flagship"
+  }
+]
