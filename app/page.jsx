@@ -438,6 +438,14 @@ export default function MaReSignal() {
   
   // Mobile responsive views: 'list' | 'map' | 'detail'
   const [mobileView, setMobileView] = useState("list");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   
   // Search state
   const [searchQuery, setSearchQuery] = useState("");
@@ -680,7 +688,7 @@ export default function MaReSignal() {
                 ))}
               </div>
             </div>
-          ) : (!selected || (window.innerWidth < 768 && mobileView === "list")) ? (
+          ) : (!selected || (isMobile && mobileView === "list")) ? (
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-3 border-b border-[#E2E2DE] shrink-0 bg-[#F5F1EA]/50">
                 <div className="flex items-center gap-2">
@@ -736,7 +744,7 @@ export default function MaReSignal() {
 
         {/* Right Column: Map */}
         <div className={`flex-1 bg-[#E4ECED] relative ${mobileView === "map" ? "block" : "hidden md:block"}`}>
-          {status === "done" && (
+          {status === "done" && (!isMobile || mobileView === "map") && (
             <Map 
               salons={displayedSalons} 
               center={location} 
