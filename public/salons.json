@@ -1,86 +1,8 @@
 [
   {
-    "id": "salon-by-the-sea-miami",
-    "name": "Salon by the Sea",
-    "city": "Coral Gables, FL",
-    "website": "https://salonbythesea.example",
-    "instagram": "@salonbythesea",
-    "business_type": "salon",
-    "revenue_tier": "$1M-$2M",
-    "location_count": 2,
-    "aesthetic": [
-      "modern-minimal",
-      "organic-wellness"
-    ],
-    "personalization_hook": "Recently opened a second location in Palm Beach with a dedicated wellness floor",
-    "fit_score": 87,
-    "score_reasons": [
-      "$1M+ revenue tier (20pts)",
-      "Palm Beach HNW location (15pts)",
-      "Aesthetic match — clean modern + wellness (20pts)",
-      "Recent expansion signals expansion readiness (10pts)",
-      "Multi-location (bonus)"
-    ],
-    "estimated_weekly_clients": 40,
-    "projected_retail_uplift_annual_usd": 187000,
-    "testimonial_archetype": "boutique-multi-location"
-  },
-  {
-    "id": "atelier-nord-nyc",
-    "name": "Atelier Nord",
-    "city": "New York, NY",
-    "website": "https://ateliernord.example",
-    "instagram": "@ateliernord",
-    "business_type": "salon",
-    "revenue_tier": "$2M-$5M",
-    "location_count": 1,
-    "aesthetic": [
-      "classic-luxe",
-      "modern-minimal"
-    ],
-    "personalization_hook": "Named one of New York Magazine's top five hair houses of 2025, with a client list that reads like the Forbes 400",
-    "fit_score": 92,
-    "score_reasons": [
-      "$2M+ revenue tier (25pts)",
-      "Manhattan HNW location (15pts)",
-      "Classic-luxe aesthetic match (20pts)",
-      "Press recognition + celebrity clientele (25pts)",
-      "Single flagship (bonus for focus)"
-    ],
-    "estimated_weekly_clients": 65,
-    "projected_retail_uplift_annual_usd": 312000,
-    "testimonial_archetype": "flagship-single-location"
-  },
-  {
-    "id": "the-canyon-spa-aspen",
-    "name": "The Canyon Spa",
-    "city": "Aspen, CO",
-    "website": "https://thecanyonspa.example",
-    "instagram": "@thecanyonspa",
-    "business_type": "hotel_spa",
-    "revenue_tier": "$5M+",
-    "location_count": 1,
-    "aesthetic": [
-      "organic-wellness",
-      "classic-luxe"
-    ],
-    "personalization_hook": "Flagship spa inside a Leading Hotels of the World property, hosting Aspen's ski-season clientele from November through April",
-    "fit_score": 95,
-    "score_reasons": [
-      "$5M+ revenue tier (30pts)",
-      "Aspen HNW destination (15pts)",
-      "Organic-wellness + classic-luxe fit (20pts)",
-      "Leading Hotels of the World partner (25pts)",
-      "Seasonal HNW clientele concentration (bonus)"
-    ],
-    "estimated_weekly_clients": 90,
-    "projected_retail_uplift_annual_usd": 425000,
-    "testimonial_archetype": "resort-spa"
-  },
-  {
     "name": "DePasquale The Spa",
     "city": "Morris Plains, NJ",
-    "lat": 40.829,
+    "lat": 40.8290,
     "lng": -74.4815,
     "website": "https://depasqualethespa.com",
     "instagram": "@depasqualethespa",
@@ -105,7 +27,7 @@
     "name": "IGK Salon Soho",
     "city": "New York, NY",
     "lat": 40.7233,
-    "lng": -74.003,
+    "lng": -74.0030,
     "website": "https://www.igkhair.com/pages/salon",
     "instagram": "@igksalons",
     "business_type": "salon",
@@ -201,7 +123,7 @@
     "name": "Carillon Miami Wellness Resort",
     "city": "Miami Beach, FL",
     "lat": 25.8505,
-    "lng": -80.12,
+    "lng": -80.1200,
     "website": "https://www.carillonhotel.com",
     "instagram": "@carillonhotel",
     "business_type": "wellness_clinic",
@@ -224,8 +146,8 @@
   {
     "name": "Marie Robinson Salon",
     "city": "New York, NY",
-    "lat": 40.738,
-    "lng": -73.993,
+    "lat": 40.7380,
+    "lng": -73.9930,
     "website": "https://marierobinsonsalon.com",
     "instagram": "@marierobinsonsalon",
     "business_type": "salon",
