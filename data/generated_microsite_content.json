@@ -1,0 +1,38 @@
+[
+  {
+    "salon_id": "salon-by-the-sea-miami",
+    "hero_headline": "A science-supported MaRe head spa ritual, envisioned for Salon by the Sea",
+    "hero_subhead": "Your Coral Gables location signals the sophisticated clientele that MaRe is designed to serve.",
+    "why_you_bullets": [
+      "Salon by the Sea's revenue tier already places it among the exclusive venues that see immediate ROI with MaRe.",
+      "The modern-minimal and organic-wellness aesthetic aligns perfectly with the MaRe brand.",
+      "The recent Palm Beach expansion, including a dedicated wellness floor, demonstrates a commitment to curated client experiences."
+    ],
+    "roi_copy": "At ~40 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $187000.",
+    "testimonial_match": "boutique-multi-location"
+  },
+  {
+    "salon_id": "atelier-nord-nyc",
+    "hero_headline": "A MaRe head spa experience, designed for Atelier Nord of New York",
+    "hero_subhead": "Atelier Nord's classic-luxe aesthetic and discerning clientele are perfectly aligned with the MaRe system.",
+    "why_you_bullets": [
+      "Atelier Nord's $2M+ revenue tier signals the capacity for a luxury service expansion.",
+      "The salon's consistent placement in New York Magazine and Forbes 400 clientele demonstrates a commitment to exclusive experiences.",
+      "Your flagship location in Manhattan allows for a systematic integration of the MaRe head spa protocol."
+    ],
+    "roi_copy": "At ~65 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $312000.",
+    "testimonial_match": "flagship-single-location"
+  },
+  {
+    "salon_id": "the-canyon-spa-aspen",
+    "hero_headline": "A MaRe head spa experience, designed for The Canyon Spa",
+    "hero_subhead": "Your Aspen location inside a Leading Hotels of the World property draws a discerning clientele.",
+    "why_you_bullets": [
+      "The Canyon Spa's $5M+ revenue tier signals the scale to integrate a luxury head spa system.",
+      "Your organic-wellness and classic-luxe aesthetic aligns perfectly with MaRe's science-supported approach.",
+      "As the flagship spa inside a Leading Hotels of the World property, you already serve MaRe's target demographic."
+    ],
+    "roi_copy": "At ~90 clients each week, MaRe Eye moves you from the industry-standard 3% retail conversion to 40%+. Projected additional annual revenue: $425000.",
+    "testimonial_match": "resort-spa"
+  }
+]
