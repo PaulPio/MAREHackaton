@@ -55,14 +55,20 @@ function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
   // Handle zooming when a location is picked from search
   useEffect(() => {
     if (center) {
-      map.setView(center, 11, { animate: true });
+      // Use flyTo for smooth parabolic animation
+      map.flyTo(center, 11, { duration: 1.5, easeLinearity: 0.25 });
+    } else {
+      // If user cleared the search (center became null), fly to USA map
+      map.flyTo(defaultCenter, 4, { duration: 1.5, easeLinearity: 0.25 });
     }
   }, [center, map]);
 
   // Handle zoom out when unselecting a salon (clicking "Back")
   useEffect(() => {
     if (prevSelected && !selectedSalon) {
-      map.setView(center || defaultCenter, center ? 9 : 4, { animate: true });
+      // If they had a center selected (like Miami), fly to that city's zoom (11)
+      // Otherwise, fly to the USA zoom (4)
+      map.flyTo(center || defaultCenter, center ? 11 : 4, { duration: 1.5, easeLinearity: 0.25 });
     }
     setPrevSelected(selectedSalon);
   }, [selectedSalon, prevSelected, center, map]);
@@ -97,7 +103,8 @@ function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
         icon={createStateIcon(cluster.count)}
         eventHandlers={{
           click: () => {
-            map.setView([cluster.lat, cluster.lng], 9, { animate: true });
+            // Smoothly fly into the state cluster
+            map.flyTo([cluster.lat, cluster.lng], 10, { duration: 1.5, easeLinearity: 0.25 });
           }
         }}
       />
@@ -105,14 +112,15 @@ function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
   }
 
   // If zoomed in, show individual salons
-  return salons.map((salon) => (
+  return salons.map((salon, i) => (
     <Marker
-      key={salon.name}
+      key={salon.name + i}
       position={[salon.lat, salon.lng]}
       eventHandlers={{
         click: () => {
           onSelectSalon(salon);
-          map.setView([salon.lat, salon.lng], 13, { animate: true });
+          // Smoothly fly to the exact salon location
+          map.flyTo([salon.lat, salon.lng], 15, { duration: 1.5, easeLinearity: 0.25 });
         },
       }}
     >
