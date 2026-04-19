@@ -12,21 +12,39 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-const createStateIcon = (stateCode, count) => {
+const createStateIcon = (count) => {
+  let numIcons = 1;
+  if (count >= 2 && count <= 3) numIcons = 2;
+  if (count >= 4) numIcons = 3;
+
+  const svgStr = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 2l10 8h-2v11H4V10H2L12 2z"/>
+    <rect x="7" y="12" width="4" height="4" fill="white"/>
+    <rect x="13" y="14" width="3" height="5" fill="white"/>
+  </svg>`;
+
+  const iconsHtml = svgStr.repeat(numIcons);
+
   return L.divIcon({
-    html: `<div style="background-color: #296167; color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 600; font-family: Manrope, sans-serif; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); line-height: 1.1; cursor: pointer;">
-      <span style="font-size: 14px; letter-spacing: 0.5px;">${stateCode}</span>
-      <span style="font-size: 10px; opacity: 0.85;">${count} salons</span>
+    html: `<div style="position: relative; display: flex; flex-direction: column; align-items: center; transform: translateY(-10px);">
+      <div style="background: #7C9FA3; padding: 6px; border-radius: 30px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.2s ease;">
+        <div style="background: white; padding: 6px 10px; border-radius: 20px; display: flex; align-items: center; justify-content: center; gap: 4px; color: #296167; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">
+           ${iconsHtml}
+        </div>
+      </div>
+      <div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid #7C9FA3; margin-top: -1px;"></div>
     </div>`,
     className: 'custom-state-icon',
-    iconSize: [44, 44],
-    iconAnchor: [22, 22]
+    iconSize: [80, 50],
+    iconAnchor: [40, 40]
   });
 };
 
-function MapContent({ salons, center, onSelectSalon }) {
+function MapContent({ salons, center, onSelectSalon, selectedSalon }) {
   const map = useMap();
   const [zoom, setZoom] = useState(map.getZoom());
+  const [prevSelected, setPrevSelected] = useState(selectedSalon);
+  const defaultCenter = [39.8283, -98.5795];
 
   useMapEvents({
     zoomend: () => {
@@ -34,11 +52,20 @@ function MapContent({ salons, center, onSelectSalon }) {
     }
   });
 
+  // Handle zooming when a location is picked from search
   useEffect(() => {
     if (center) {
       map.setView(center, 11, { animate: true });
     }
   }, [center, map]);
+
+  // Handle zoom out when unselecting a salon (clicking "Back")
+  useEffect(() => {
+    if (prevSelected && !selectedSalon) {
+      map.setView(center || defaultCenter, center ? 9 : 4, { animate: true });
+    }
+    setPrevSelected(selectedSalon);
+  }, [selectedSalon, prevSelected, center, map]);
 
   // Group by state
   const stateGroups = {};
@@ -61,13 +88,13 @@ function MapContent({ salons, center, onSelectSalon }) {
     lng: g.lng / g.count
   }));
 
-  // If zoomed out, show state clusters
+  // If zoomed out, show state clusters with house icons based on density
   if (zoom < 7) {
     return clusters.map(cluster => (
       <Marker
         key={cluster.state}
         position={[cluster.lat, cluster.lng]}
-        icon={createStateIcon(cluster.state, cluster.count)}
+        icon={createStateIcon(cluster.count)}
         eventHandlers={{
           click: () => {
             map.setView([cluster.lat, cluster.lng], 9, { animate: true });
@@ -85,7 +112,6 @@ function MapContent({ salons, center, onSelectSalon }) {
       eventHandlers={{
         click: () => {
           onSelectSalon(salon);
-          // Optional: slightly zoom in when clicking a specific salon marker
           map.setView([salon.lat, salon.lng], 13, { animate: true });
         },
       }}
@@ -112,7 +138,7 @@ export default function Map({ salons, center, onSelectSalon, selectedSalon }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
-        <MapContent salons={salons} center={center} onSelectSalon={onSelectSalon} />
+        <MapContent salons={salons} center={center} onSelectSalon={onSelectSalon} selectedSalon={selectedSalon} />
       </MapContainer>
     </div>
   );
