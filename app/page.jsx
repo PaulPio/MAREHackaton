@@ -72,76 +72,17 @@ function getDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Dynamically fetch salons from OpenStreetMap Overpass API
+// Dynamically fetch salons from Next.js API Route (which safely calls Google Places API)
 async function fetchLocalSalons(lat, lng) {
-  const query = `
-    [out:json];
-    (
-      node["leisure"="spa"](around:40000,${lat},${lng});
-      node["shop"="beauty"](around:40000,${lat},${lng});
-      node["shop"="hairdresser"](around:40000,${lat},${lng});
-      node["shop"="massage"](around:40000,${lat},${lng});
-      node["amenity"="barbershop"](around:40000,${lat},${lng});
-      
-      way["leisure"="spa"](around:40000,${lat},${lng});
-      way["shop"="beauty"](around:40000,${lat},${lng});
-      way["shop"="hairdresser"](around:40000,${lat},${lng});
-      way["shop"="massage"](around:40000,${lat},${lng});
-      way["amenity"="barbershop"](around:40000,${lat},${lng});
-    );
-    out center 150;
-  `;
-  const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
+  const res = await fetch(`/api/places?lat=${lat}&lng=${lng}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch from Google Places API");
+  }
   const data = await res.json();
-  
-  let elements = data.elements.filter(e => e.tags && e.tags.name);
-  
-  // Cap at exactly 50 to optimize memory
-  elements = elements.slice(0, 50);
-  
-  return elements.map(e => {
-      const seed = e.id;
-      const fitScore = 65 + (seed % 35);
-      const googleRating = (4.0 + ((seed % 10) / 10)).toFixed(1);
-      const reviews = 40 + (seed % 250);
-      const isSpa = e.tags.leisure === "spa" || e.tags.shop === "beauty" || e.tags.shop === "massage";
-      
-      const phone = e.tags.phone || `+1 (${Math.floor(300 + (seed % 600))}) ${Math.floor(200 + (seed % 799))}-${Math.floor(1000 + (seed % 8999))}`;
-      const website = e.tags.website || null;
-      
-      const aestheticTags = ["modern-minimal", "classic-luxe", "organic-wellness", "clinical-medical"];
-      const aesthetic_tag = aestheticTags[seed % aestheticTags.length];
-      
-      // Handle ways returning center coords
-      const eLat = e.lat || (e.center && e.center.lat);
-      const eLng = e.lon || (e.center && e.center.lon);
-      
-      return {
-        name: e.tags.name,
-        city: e.tags["addr:city"] || "Local Area",
-        state: e.tags["addr:state"] || "FL",
-        business_type: isSpa ? "day_spa" : (e.tags.amenity === "barbershop" ? "barbershop" : "hair_salon"),
-        aesthetic_tag,
-        lat: eLat,
-        lng: eLng,
-        fit_score: fitScore,
-        revenue_tier: fitScore > 85 ? "$2.5M - $5M" : "$1M - $2.5M",
-        location_count: 1 + (seed % 3),
-        score_breakdown: {
-          revenue_tier: Math.floor(fitScore * 0.3),
-          luxury_signal: Math.floor(fitScore * 0.25),
-          aesthetic_fit: Math.floor(fitScore * 0.20),
-          location_match: Math.floor(fitScore * 0.15),
-          expansion_readiness: Math.floor(fitScore * 0.10)
-        },
-        hook: "Detected strong local search volume. Ideal candidate for premium retail integration.",
-        google_rating: googleRating,
-        review_count: reviews,
-        phone,
-        website,
-        is_dynamic: true,
-      };
-    });
+  if (data.error) {
+    throw new Error(data.error);
+  }
+  return data;
 }
 
 const ScoreRing = ({ score }) => {
@@ -481,7 +422,7 @@ export default function MaReSignal() {
           setStatus("done");
         })
         .catch(err => {
-          console.error("Overpass API failed, falling back to static", err);
+          console.error("Google API failed, falling back to static", err);
           // Fallback
           const filtered = allSalons.filter(s => {
             if (!s.lat || !s.lng) return true;
@@ -672,7 +613,7 @@ export default function MaReSignal() {
                 )}
                 {/* Real Data Guarantee */}
                 <div style={{ padding: "20px", fontSize: "10px", color: COLORS.brown200, textAlign: "center", borderTop: `1px solid ${COLORS.light}` }}>
-                  <strong>Data Accuracy:</strong> This tool dynamically searches OpenStreetMap for real, physical locations. Metrics like Fit Scores and Google ratings are mocked for demonstration UX, but the spas and barbershops are real businesses.
+                  <strong>Data Accuracy:</strong> This tool dynamically searches the official Google Maps Places API for real, highly-rated physical locations. Metrics like Fit Scores and contact numbers are mocked for demonstration UX, but the spas and barbershops are authentic businesses.
                 </div>
               </div>
             </div>
